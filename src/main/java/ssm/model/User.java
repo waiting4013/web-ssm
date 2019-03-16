@@ -2,6 +2,7 @@ package ssm.model;
 
 import javax.persistence.Table;
 import java.util.Date;
+
 @Table(name="user")
 public class User {
     private Long id;

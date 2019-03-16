@@ -1,8 +1,12 @@
 package test;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 public class test {
     /**
@@ -72,5 +76,12 @@ public class test {
         return file;
 
     }
+        public  static void  main(String[] args){
+            Date date=new Date();
+            date.getTime();
+            System.out.println(date.getTime());
+            Long localDateTime=LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();;
+            System.out.println(localDateTime);
 
+        }
 }

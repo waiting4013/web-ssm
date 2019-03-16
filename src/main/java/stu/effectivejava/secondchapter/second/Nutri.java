@@ -16,7 +16,7 @@ public class Nutri {
             s[0]=112;
            String cc= s.toString();
         System.out.println(s);
-        //ThreadPoolTaskExecutor poolTaskExecutor=new ThreadPoolTaskExecutor();
+        ThreadPoolTaskExecutor poolTaskExecutor=new ThreadPoolTaskExecutor();
 
     }
 
