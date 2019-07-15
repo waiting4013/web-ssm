@@ -4,6 +4,8 @@ package stu.designpatterns.factory;
  * @author zz
  *
  */
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.Scanner;
 
 public class Program {

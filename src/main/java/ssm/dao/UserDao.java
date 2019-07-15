@@ -1,13 +1,13 @@
 package ssm.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ssm.model.User;
 
 import java.util.List;
 
 
-@Component
+@Repository
 public interface UserDao {
     User selectUserById(@Param("userId") Long userId);
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="aop"/>
+    <!-- 使用aop面向注解的代理方式 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <bean id="user" class="aop.IUserImpl"/>
+
+    <bean id="check" class="aop.CheckUser"/>
+    <aop:config>
+        <aop:pointcut id="find" expression="execution(* aop.*.find*(..))" />
+        <aop:pointcut id="add" 	expression="execution(* aop.*.add*(..))" />
+
+        <aop:aspect id="checkUser" ref="check">
+            <aop:before method="beforeCheck" pointcut-ref="find"/>
+            <aop:after method="afterCheck" pointcut-ref="find"/>
+        </aop:aspect>
+
+        <aop:aspect id="checkAdd" ref="check">
+            <aop:before method="beforeAdd" pointcut-ref="add"/>
+            <aop:after method="afterAdd" pointcut-ref="add"/>
+        </aop:aspect>
+
+    </aop:config>
+</beans>
+

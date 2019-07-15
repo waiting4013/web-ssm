@@ -1,5 +1,7 @@
 package test;
 
+import org.mybatis.spring.annotation.MapperScan;
+
 import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -7,6 +9,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class test {
     /**
@@ -77,11 +81,13 @@ public class test {
 
     }
         public  static void  main(String[] args){
-            Date date=new Date();
+           /* Date date=new Date();
             date.getTime();
             System.out.println(date.getTime());
             Long localDateTime=LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();;
-            System.out.println(localDateTime);
-
+            System.out.println(localDateTime);*/
+            Map<String,String> map=new HashMap<>();
+            map.put("wq","qw");
+            System.out.println(map);
         }
 }
