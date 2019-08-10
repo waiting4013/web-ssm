@@ -1,0 +1,48 @@
+generated
+.settings
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### ice ###
+src/main/java/EjiayouStationServer
+/generated/
+src/main/java/.depend
+.fbprefs
+src/main/webapp/WEB-INF/classes
+disconf
+/jdbc.properties
+/jdbc.properties.lock
+/other.properties
+/other.properties.lock
+
+/dependency-reduced-pom.xml
+
+### Gradle ###
+.gradle
+.DS_Store
+/build
+/out
+*.class
+src/main/webapp/admin/_footer.jsp
