@@ -1,15 +1,14 @@
 package test;
 
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class CalendarTest {
     public static void main(String[] args) {
 
-        String firstDay= DateUtil.getMonthFirstDay(0);
+      /*  String firstDay= DateUtil.getMonthFirstDay(0);
         String finallDay=DateUtil.getMonthFinalDay(0);
 
         System.out.println(firstDay);
@@ -26,7 +25,7 @@ public class CalendarTest {
         int dom = cale.get(Calendar.DAY_OF_MONTH);
         int doy = cale.get(Calendar.DAY_OF_YEAR);
 
-    /*    System.out.println("Current Date: " + cale.getTime());
+    *//*    System.out.println("Current Date: " + cale.getTime());
         System.out.println("Year: " + year);
         System.out.println("Month: " + month);
         System.out.println("Day: " + day);
@@ -35,7 +34,7 @@ public class CalendarTest {
         System.out.println("Second: " + second);
         System.out.println("Day of Week: " + dow);
         System.out.println("Day of Month: " + dom);
-        System.out.println("Day of Year: " + doy);*/
+        System.out.println("Day of Year: " + doy);*//*
 
         // 获取当月第一天和最后一天
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,6 +56,30 @@ public class CalendarTest {
         Date d = new Date();
         System.out.println("当前日期字符串1：" + format.format(d));
         System.out.println("当前日期字符串2：" + year + "/" + month + "/" + day + " "
-                + hour + ":" + minute + ":" + second);
+                + hour + ":" + minute + ":" + second);*/
+    /*    String lastMonthStartTime=DateUtil.getMonthFirstDay(-1)+" 00:00:00";
+
+        String lastMonthEndTime=DateUtil.getMonthFinalDay(-1)+" 00:00:00";
+
+        String month=DateUtil.getMonth(0);
+        String newMonth=month.substring(4);
+        BigDecimal one=BigDecimal.ZERO;
+        BigDecimal WTO=BigDecimal.ZERO;
+        Integer num=WTO.compareTo(one);
+
+        System.out.println(num);
+        //System.out.println(lastMonthEndTime);*/
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTimes=LocalDateTime.now().minusDays(7);
+        String localDateTime=LocalDateTime.now().format(dtf2);
+        String localDateTime1= LocalDateTime.now().minusDays(7).format(dtf2);
+        String s=DateUtil.getNow();
+        Date e=DateUtil.getLastDayOfWeek(new Date());
+        System.out.println(s);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime1);
+
     }
+
+
 }

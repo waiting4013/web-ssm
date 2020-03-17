@@ -1,16 +1,10 @@
 package test;
 
-import org.mybatis.spring.annotation.MapperScan;
-
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 public class test {
     /**
@@ -81,13 +75,74 @@ public class test {
 
     }
         public  static void  main(String[] args){
-           /* Date date=new Date();
-            date.getTime();
-            System.out.println(date.getTime());
-            Long localDateTime=LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();;
-            System.out.println(localDateTime);*/
-            Map<String,String> map=new HashMap<>();
-            map.put("wq","qw");
-            System.out.println(map);
+
+            String s1="1,12,34,5,6,7";
+
+            String s2="1,2,3,4,5,6,7,12";
+            String checkedCarType="1,7";
+            String[] stringS1 = s1.split(",");
+            String[] stringS2=s2.split(",");
+            String[] checkedCarTypes=checkedCarType.split(",");
+            List<String> tt1= Arrays.asList(stringS1);
+            List<String> tt2= Arrays.asList(stringS2);
+
+
+            int num=0;
+            int num2=0;
+            for (String car: checkedCarTypes) {
+
+                if(tt1.contains(car)){
+                    num=num+1;
+                }
+
+            }
+            for (String car: checkedCarTypes) {
+
+                if(tt2.contains(car)){
+                    num2=num2+1;
+                }
+
+            }
+            if(num==checkedCarTypes.length&&num2==checkedCarTypes.length){
+                System.out.println("全部包含");
+            }else {
+
+                System.out.println("不全部包含");
+            }
+
+
+
+
+
+
+
+
+           /* String[] zz=s1.split(",");
+            //相等的话查询一个的carTypes
+            Integer [] s={1,2,3,8,9};
+            Integer [] w={3,5,6};
+            List<Integer> ee=new ArrayList<>();
+            ee.add(3);
+            ee.add(5);
+            ee.add(6);
+            List<Integer> ss=new ArrayList<>();
+            //ss.add(1);
+            //ss.add(2);
+            ss.add(3);
+            //ss.add(4);
+            ss.add(5);
+            ss.add(6);
+            //ss.add(7);
+            //ss.add(8);
+            //ss.add(9);
+            boolean ccc=ss.contains(ee);
+            int ce=0;
+            for (Integer i: s) {
+               if(ss.contains(i)){
+                ce=ce+1;
+               }
+            }
+            System.out.println(ce);
+            System.out.println(ccc);*/
         }
 }
