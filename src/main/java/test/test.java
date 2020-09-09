@@ -3,8 +3,9 @@ package test;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class test {
     /**
@@ -74,9 +75,9 @@ public class test {
         return file;
 
     }
-        public  static void  main(String[] args){
+        public  static void  main(String[] args) throws ParseException {
 
-            String s1="1,12,34,5,6,7";
+            /*String s1="1,12,34,5,6,7";
 
             String s2="1,2,3,4,5,6,7,12";
             String checkedCarType="1,7";
@@ -108,11 +109,30 @@ public class test {
             }else {
 
                 System.out.println("不全部包含");
-            }
+            }*/
 
+            /*BigDecimal bigDecimal = Tools.stringToBigDecimal("-100");
+            System.out.println(bigDecimal);
+            Calendar beginCal = Calendar.getInstance();
 
+            String beginStr="2020-01-02";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+            beginCal.setTime(sdf.parse(beginStr));
+            String date = sdf1.format(beginCal.getTime());
+            System.out.println(date);*/
+            String formatString = "yyyy-MM-dd HH:mm:ss";
 
+            SimpleDateFormat format = new SimpleDateFormat(formatString);
+            String todayNext = DateUtil.getTodayNext(-7);
+            System.out.println(todayNext);
+            DateUtil.getBeforeDay("2020-07-14");
 
+            int dayOfMonth = LocalDate.now().getDayOfMonth();
+            LocalDate.now();
+            String firstDayOfBeforeMonth = DateUtil.getFirstDayOfBeforeMonth(LocalDate.now());
+            System.out.println(dayOfMonth);
+            System.out.println(firstDayOfBeforeMonth);
 
 
 

@@ -1,9 +1,7 @@
 package test;
 
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.Random;
 
 public class CalendarTest {
     public static void main(String[] args) {
@@ -69,6 +67,7 @@ public class CalendarTest {
 
         System.out.println(num);
         //System.out.println(lastMonthEndTime);*/
+/*
         DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localDateTimes=LocalDateTime.now().minusDays(7);
         String localDateTime=LocalDateTime.now().format(dtf2);
@@ -78,6 +77,18 @@ public class CalendarTest {
         System.out.println(s);
         System.out.println(localDateTime);
         System.out.println(localDateTime1);
+
+
+        String time = DateUtil.formatDateTime(System.currentTimeMillis(), 1);
+        System.out.println(time);
+*/
+
+
+        //Math.random();
+        Random rand = new Random();
+        //[900]：900个    100：从100
+        int x = rand.nextInt(900) + 100;
+        System.out.println(x);
 
     }
 

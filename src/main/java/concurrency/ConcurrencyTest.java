@@ -14,14 +14,11 @@ public class ConcurrencyTest {
      */
     private static void concurrency() throws InterruptedException{
         long start=System.currentTimeMillis();
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int a=0;
-                for (long i=0;i<count;i++){
+        Thread thread=new Thread(() -> {
+            int a=0;
+            for (long i=0;i<count;i++){
 
-                    a+=5;
-                }
+                a+=5;
             }
         });
         thread.start();
