@@ -1,6 +1,7 @@
-package test;
+package ssm.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import test.DesEncrypt;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;

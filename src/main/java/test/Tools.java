@@ -2,6 +2,7 @@ package test;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ssm.utils.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;

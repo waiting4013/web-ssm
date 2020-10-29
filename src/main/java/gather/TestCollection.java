@@ -1,6 +1,6 @@
 package gather;
 
-import test.DateUtil;
+import ssm.utils.DateUtil;
 
 public class TestCollection {
 
