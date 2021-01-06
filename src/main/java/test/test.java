@@ -8,6 +8,9 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class test {
     /**
@@ -127,17 +130,30 @@ public class test {
 
             SimpleDateFormat format = new SimpleDateFormat(formatString);
             String todayNext = DateUtil.getTodayNext(-7);
-            System.out.println(todayNext);
+            //System.out.println(todayNext);
             DateUtil.getBeforeDay("2020-07-14");
 
             int dayOfMonth = LocalDate.now().getDayOfMonth();
             LocalDate.now();
             String firstDayOfBeforeMonth = DateUtil.getFirstDayOfBeforeMonth(LocalDate.now());
-            System.out.println(dayOfMonth);
-            System.out.println(firstDayOfBeforeMonth);
+            //System.out.println(dayOfMonth);
+            //System.out.println(firstDayOfBeforeMonth);
 
 
-
+            String sql = "SELECT uo.coupon_value,uo.invoice_head,uo.subsidy_money,uo.order_id,uo.order_sum,uo.settle_sum,uo.original_cost,uo.oil_price,uo.unit_price,uo.oil_mass,uo.pay_order_time,uo.pay_status,eo.oil_name,eog.oilgun_name,eog.oilgun_id,yu.user_car_number,uo.car_type,uoipl.log_id,uo.order_sign,uo.is_filled"
+                    + " FROM user_order uo LEFT JOIN ejiayou_oil eo ON ( eo.id = uo.oil_id) "
+                    + " INNER JOIN ejiayou_order_oilgun eoo ON (eoo.order_id =uo.order_id) "
+                    + "  LEFT JOIN yijiayou_user yu ON (yu.user_id = uo.user_id) "
+                    + "  LEFT join user_order_invoice_print_logs uoipl on (uo.order_Id=uoipl.order_id and uoipl.state=1) "
+                    + " INNER JOIN ejiayou_oilgun eog ON (	eoo.oilgun_id = eog.oilgun_id ) "
+                    + " WHERE uo.state=1 and eo.state=1 and eoo.state=1 and eog.state=1 and	uo.pay_status = 1 "
+                    + "  and uo.pay_order_time is not null AND uo.filling_station_id =" + 12
+                    + " and eoo.oilgun_id in(select oilgun_id from oilgun_group where state=1  and is_apply=1 and server_group_id="
+                    //+ groupId
+                    + " and station_id=";
+                    //+ stationId
+                    //+ ") "
+                   // + "  AND  uo.pay_order_time >='" + endSettlementTime + "' ORDER BY	uo.pay_order_time"
 
            /* String[] zz=s1.split(",");
             //相等的话查询一个的carTypes
@@ -166,5 +182,59 @@ public class test {
             }
             System.out.println(ce);
             System.out.println(ccc);*/
+
+            List<String> list = new ArrayList<>();
+            String sa="sda";
+            list.add(sa);
+            list.add("sda1");
+            list.add("sda2");
+            list.add("sda3");
+            String ddd = "sda";
+            boolean contains = list.contains(ddd);
+            //System.out.println(contains);
+
+
+
+            //deal("",22223319);
+
+            String monthFinalDay = DateUtil.getMonthFinalDay("2020-11-12", 0);
+
+
+            System.out.println(monthFinalDay);
+
+        }
+        private static boolean  deal(String key,int stationId){
+
+            //先查询redis是否存在配置
+            String stationIds = null;
+            //不用list的contain 是因为  对应的是匹配的==值,是比较的地址值.所以会出现value值相同的时候,未必是包含的
+            List<String>  stations = Arrays.asList((stationIds==null?"":stationIds).split(","));
+            ArrayList<String> arrayList = new ArrayList<>(stations);
+            //Log.out("stationIdssss-------:" + arrayList);
+
+            //如果存在
+            if(stations.contains(String.valueOf(stationId))){
+                //Log.out("返回值1-------:" + true);
+                System.out.println("返回值1-------:" + true);
+                return true;
+            }else {
+                //如果不存在 查询数据库
+                //ServiceDB db = new ServiceDB();
+                String tickerStationIds = "12,22223319";
+                stations = Arrays.asList(tickerStationIds.split(","));
+                arrayList = new ArrayList<>(stations);
+//                Log.out("查询数据库的list-------:" + arrayList);
+                //如果数据库存在更新redis
+                if (stations.contains(String.valueOf(stationId))) {
+                    System.out.println("返回值2-------:" + true);
+                    //暂时存放   秒 单位
+//                    JedisUtil.putAndSetExpire(key, tickerStationIds, 300);
+                    return true;
+                } else {
+//                   Log.out("返回值3-------:" + false);
+                    System.out.println("返回值3-------:" + false);
+                    return false;
+                }
+            }
         }
 }

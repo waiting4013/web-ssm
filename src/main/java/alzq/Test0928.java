@@ -10,23 +10,27 @@ public class Test0928 {
 
 
     public static void main(String[] args) {
+        //增幅
+        //1.428571428571429
         //金额
-        BigDecimal ben = BigDecimal.valueOf(100);
+        BigDecimal ben = BigDecimal.valueOf(55);
         //利率
-        BigDecimal rate = BigDecimal.valueOf(0.20);
+        BigDecimal rate = BigDecimal.valueOf(0.25);
         //年限
-        int year = 10;
-        BigDecimal odd = cal(year, ben, rate);
+        int year = 4;
+        //工资
+        BigDecimal sa = BigDecimal.valueOf(10);
+        BigDecimal odd = cal(year, ben, rate, sa);
         System.out.println(odd);
     }
 
     //50    34.3 + 8 + 0.4 + 12 + 1 + 2.8 + 1 + 0.5
 
 
-    private static BigDecimal cal(int year, BigDecimal ben, BigDecimal rate) {
+    private static BigDecimal cal(int year, BigDecimal ben, BigDecimal rate, BigDecimal sa) {
         BigDecimal finalMoney = ben;
         for (int i = 0; i < year; i++) {
-            finalMoney = finalMoney.add(finalMoney.multiply(rate));
+            finalMoney = finalMoney.add(finalMoney.multiply(rate)).add(sa);
         }
         return finalMoney;//.add(BigDecimal.valueOf(8));
     }
