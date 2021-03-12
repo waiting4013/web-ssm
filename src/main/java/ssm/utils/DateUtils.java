@@ -531,6 +531,128 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	}
 
 	/**
+	 * 获取时间区间内的每一天
+	 * @param begintTime
+	 * @param endTime
+	 * @return
+	 */
+	public static List<String> findDaysStr(String begintTime, String endTime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dBegin = null;
+		Date dEnd = null;
+		try {
+			dBegin = sdf.parse(begintTime);
+			dEnd = sdf.parse(endTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<String> daysStrList = new ArrayList<String>();
+		daysStrList.add(sdf.format(dBegin));
+		Calendar calBegin = Calendar.getInstance();
+		calBegin.setTime(dBegin);
+		Calendar calEnd = Calendar.getInstance();
+		calEnd.setTime(dEnd);
+		while (dEnd.after(calBegin.getTime())) {
+			calBegin.add(Calendar.DAY_OF_MONTH, 1);
+			String dayStr = sdf.format(calBegin.getTime());
+			daysStrList.add(dayStr);
+		}
+		return daysStrList;
+	}
+
+	/**
+	 *
+	 * 	获取时间的周一和周日
+	 * @return
+	 */
+	public static Map<String,String> getWeekDate(String dateStr) throws ParseException {
+		Map<String,String> map = new HashMap<>(2);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date =sdf.parse(dateStr);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.setFirstDayOfWeek(Calendar.MONDAY);// 设置一个星期的第一天，按中国的习惯一个星期的第一天是星期一
+		int dayWeek = cal.get(Calendar.DAY_OF_WEEK);// 获得当前日期是一个星期的第几天
+		if(dayWeek==1){
+			dayWeek = 8;
+		}
+		System.out.println("要计算日期为:" + sdf.format(cal.getTime())); // 输出要计算日期
+
+		cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - dayWeek);// 根据日历的规则，给当前日期减去星期几与一个星期第一天的差值
+		Date mondayDate = cal.getTime();
+		String weekBegin = sdf.format(mondayDate);
+		System.out.println("所在周星期一的日期：" + weekBegin);
+
+
+		cal.add(Calendar.DATE, 4 +cal.getFirstDayOfWeek());
+		Date sundayDate = cal.getTime();
+		String weekEnd = sdf.format(sundayDate);
+		System.out.println("所在周星期日的日期：" + weekEnd);
+
+		map.put("mondayDate", weekBegin);
+		map.put("sundayDate", weekEnd);
+		return map;
+	}
+
+
+/*	//总共有几周 当天是这段时间的第几周
+	public static Long[] weekNum(String  begin,String  end) throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(DateUtils.parseDate(begin,DateUtils.FORMAT_DATE));
+		int monday = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		if(monday!=1){
+			cal.set(cal.DAY_OF_WEEK, cal.MONDAY);
+			begin= DateUtils.format(cal.getTime(),DateUtils.FORMAT_DATE);
+		}
+		System.out.println("学期开始时间所在周周一日期："+begin);
+
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(DateUtils.parseDate(end,DateUtils.FORMAT_DATE));
+		int sunday = cal1.get(Calendar.DAY_OF_WEEK) - 1;
+		if(sunday!=0){
+			cal1.set(Calendar.DATE, cal1.get(cal1.DATE) + 6);
+			end = DateUtils.format(cal1.getTime(),DateUtils.FORMAT_DATE);
+		}
+		System.out.println("学期结束时间所在周周日日期："+end);
+
+		Long totalWeek = 0l;
+		Long thisWeek = 0l;
+		String nowDate = DateUtils.format(new Date(),DateUtils.FORMAT_DATE);
+
+		int ss = 1000;
+		int mi = ss * 60;
+		int hh = mi * 60;
+		int dd = hh * 24;
+		Long beginTime =DateUtils.parse(begin,DateUtils.FORMAT_DATE).getTime();
+		Long endTime =DateUtils.parse(end,DateUtils.FORMAT_DATE).getTime();
+		//当前时间的星期天
+		Calendar cal2 = Calendar.getInstance();
+		cal2.setTime(new Date());
+		int thisSunDay = cal2.get(Calendar.DAY_OF_WEEK) - 1;
+		if(thisSunDay!=0){
+			cal2.set(Calendar.DATE, cal2.get(cal2.DATE) + 6);
+			nowDate = DateUtils.format(cal2.getTime(),DateUtils.FORMAT_DATE);
+		}
+		System.out.println("当前时间所在周周日日期："+nowDate);
+
+		Long now =  DateUtils.parse(nowDate,DateUtils.FORMAT_DATE).getTime();
+
+		//得到总共的天数，因为开始时间没有计算进去故加1
+		Long totalWeekTime = (endTime-beginTime)/ dd+1;
+		Long thisWeekTime = (now-beginTime)/dd+1;
+		totalWeek = totalWeekTime/7;//得到总的周数
+
+
+		if(now>endTime){
+			thisWeek = 1l;//默认显示第一周
+		}else if(monday==0){
+			thisWeek= thisWeekTime/7+1;//因英文第一天是周日故+1
+		}else{
+			thisWeek= thisWeekTime/7;
+		}
+		return new Long[]{thisWeek,totalWeek};
+	}*/
+	/**
 	 * @name getMonthFinalDay
 	 * @description 获取当前月份前intervals个月的最后一天的日期
 	 * @return String
@@ -1165,6 +1287,31 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 		}
 		return null;
 	 }
+
+	public static Boolean dateCompare(Date time1,Date time2,int numYear) {
+		Date time3 = addDate(time1, Calendar.YEAR,numYear);
+		return time3.getTime() < time2.getTime();
+	}
+	/**
+	 * 时间加减
+	 * @param date
+	 * @param calendarField ：Calendar.YEAR/ Calendar.MONTH /Calendar.DAY
+	 * @param amount
+	 * @return
+	 */
+	private static Date addDate(final Date date, final int calendarField, final int amount) {
+		if (date == null) {
+			return null;
+		}
+		final Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(calendarField, amount);
+		return c.getTime();
+	}
+
+
+
+
 
 	public static void main(String[] args) {
 		String dateStr = "2017-11-01 12:11:36";

@@ -13,9 +13,9 @@ public class Test0928 {
         //增幅
         //1.428571428571429
         //金额
-        BigDecimal ben = BigDecimal.valueOf(55);
+        BigDecimal ben = BigDecimal.valueOf(65);
         //利率
-        BigDecimal rate = BigDecimal.valueOf(0.25);
+        BigDecimal rate = BigDecimal.valueOf(0.30);
         //年限
         int year = 4;
         //工资
