@@ -4,7 +4,6 @@ import com.google.common.base.Joiner;
 import org.apache.commons.codec.digest.DigestUtils;
 import ssm.utils.DateUtils;
 
-import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,25 +84,35 @@ public class teeee {
         String sundayDate = weekEnd.get("sundayDate");
         List<String> daysStr = DateUtils.findDaysStr(mondayDate, sundayDate);
         List<String> days = new ArrayList<>();
-
+        List<List<String>> fff= new ArrayList<>();
         for (String day :daysStr){
             if (days.size()<7) {
                 days.add(day);
+                if (days.size() == 7){
+                    fff.add(days);
+                }
             } else {
-
                 days = new ArrayList<>();
+                days.add(day);
             }
         }
+        
+        for (List<String> list : fff) {
+            list.get(0);
+            list.get(6);
+        }
+
+        System.out.println(fff);
         int dayNum = daysStr.size();
         //几周
-        BigDecimal weekNums = BigDecimal.valueOf(dayNum).divide(BigDecimal.valueOf(7), 2, BigDecimal.ROUND_HALF_UP);
+      /*  BigDecimal weekNums = BigDecimal.valueOf(dayNum).divide(BigDecimal.valueOf(7), 2, BigDecimal.ROUND_HALF_UP);
         String beforeDays = DateUtils.getBeforeDays(mondayDate, 7);
         if (beforeDays.equals(sundayDate)){
 
         }
         System.out.println(beforeDays);
         System.out.println(daysStr.size());
-        System.out.println(daysStr);
+        System.out.println(daysStr);*/
     }
 
     private static String convertTime(String date) throws ParseException {
