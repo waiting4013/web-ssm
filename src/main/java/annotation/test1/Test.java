@@ -10,7 +10,7 @@ public class Test {
                     Field[] fields = cls.getDeclaredFields();
 
                         for (Field field : fields) {
-                                if(field.isAnnotationPresent(FruitName.class)==true){
+                                if(field.isAnnotationPresent(FruitName.class)){
                                       FruitName name = field.getAnnotation(FruitName.class);
                                         System.out.println("Fruit Name:"+name.value());
                                 }

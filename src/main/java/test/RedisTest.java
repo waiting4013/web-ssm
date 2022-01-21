@@ -7,7 +7,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.security.Security;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -32,7 +31,7 @@ public class RedisTest {
     }
     public static boolean sslSend(MessageInfo msg1, EmailAccount emailAccount)
             throws AddressException, MessagingException, IOException {
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+//        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         // Get a Properties object
         Properties props = new Properties();
