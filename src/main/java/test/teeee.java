@@ -1,7 +1,10 @@
 package test;
 
+import com.google.common.base.Joiner;
 import org.apache.commons.codec.digest.DigestUtils;
+import ssm.utils.DateUtils;
 
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -9,11 +12,18 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class teeee {
 
 
     public static void main(String[] args) throws ParseException {
+        String[] carType = {"12", "31"};
+        String join = Joiner.on(",").join(carType);
+        System.out.println(join);
+
+
+
        /* Date DA=minusHours(new Date(),12L);
         String dd=DateUtil.format(DA);
         String bi=DateUtil.getNow();
@@ -54,7 +64,9 @@ public class teeee {
         d.add(5);
         s.removeAll(d);
         // System.out.println(s);
-
+        String encode = URLEncoder.encode("8i4zl8oJm37Tl44flJwnM6M9uN4VOP5ayEztwFHB+hs=");
+//        URLEncoder.encode("8i4zl8oJm37Tl44flJwnM6M9uN4VOP5ayEztwFHB+hs=","");
+        System.out.println(encode);
 
         String s1 = convertTime("2020-09-01");
         //System.out.println(s1);
@@ -62,6 +74,45 @@ public class teeee {
         String sign = DigestUtils.md5Hex("2dK3bN#" + timestamp + "#P3F37w").toUpperCase();
         System.out.println(timestamp);
         System.out.println(sign);
+
+
+        String start = "2021-03-02";
+        String end = "2021-03-12";
+        Map<String, String> weekStart = DateUtils.getWeekDate(start);
+        String mondayDate = weekStart.get("mondayDate");
+        Map<String, String> weekEnd = DateUtils.getWeekDate(end);
+        String sundayDate = weekEnd.get("sundayDate");
+        List<String> daysStr = DateUtils.findDaysStr(mondayDate, sundayDate);
+        List<String> days = new ArrayList<>();
+        List<List<String>> fff= new ArrayList<>();
+        for (String day :daysStr){
+            if (days.size()<7) {
+                days.add(day);
+                if (days.size() == 7){
+                    fff.add(days);
+                }
+            } else {
+                days = new ArrayList<>();
+                days.add(day);
+            }
+        }
+        
+        for (List<String> list : fff) {
+            list.get(0);
+            list.get(6);
+        }
+
+        System.out.println(fff);
+        int dayNum = daysStr.size();
+        //几周
+      /*  BigDecimal weekNums = BigDecimal.valueOf(dayNum).divide(BigDecimal.valueOf(7), 2, BigDecimal.ROUND_HALF_UP);
+        String beforeDays = DateUtils.getBeforeDays(mondayDate, 7);
+        if (beforeDays.equals(sundayDate)){
+
+        }
+        System.out.println(beforeDays);
+        System.out.println(daysStr.size());
+        System.out.println(daysStr);*/
     }
 
     private static String convertTime(String date) throws ParseException {
