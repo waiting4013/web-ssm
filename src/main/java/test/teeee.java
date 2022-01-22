@@ -1,6 +1,5 @@
 package test;
 
-import com.google.common.base.Joiner;
 import org.apache.commons.codec.digest.DigestUtils;
 import ssm.utils.DateUtils;
 
@@ -19,8 +18,8 @@ public class teeee {
 
     public static void main(String[] args) throws ParseException {
         String[] carType = {"12", "31"};
-        String join = Joiner.on(",").join(carType);
-        System.out.println(join);
+//        String join = Joiner.on(",").join(carType);
+//        System.out.println(join);
 
 
 
