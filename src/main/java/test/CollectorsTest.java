@@ -35,7 +35,7 @@ public class CollectorsTest {
         personAssetsCount.put("商业", 2L);
         personAssetsCount.put("裤子", 3L);
         Map<String, Long> merged = Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a + b));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
         System.out.println(merged);
     }
