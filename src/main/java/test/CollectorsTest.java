@@ -3,10 +3,7 @@ package test;
 
 import alzq.Asset;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +14,7 @@ public class CollectorsTest {
         Asset asset1 = new Asset("餅乾", "1341", 12L, 110D);
         Asset asset2 = new Asset("餅乾", "DAS", 14L, 1D);
         Asset asset3 = new Asset("加油", "1341", 112L, 13D);
-        Asset asset4 = new Asset("加油", "1341", 1L, 14D);
+        Asset asset4 = new Asset("加油1", "1342", 1L, 14D);
         assets.add(asset1);
         assets.add(asset2);
         assets.add(asset3);
@@ -38,5 +35,11 @@ public class CollectorsTest {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
         System.out.println(merged);
+
+        List<Asset> assetList = assets.stream().filter(x -> x.getAssetName().equals(x.getAssetCode())).collect(Collectors.toList());
+        Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
+        System.out.println(assetList);
+        System.out.println(optionalAsset);
     }
+
 }
