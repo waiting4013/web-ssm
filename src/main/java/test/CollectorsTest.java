@@ -38,6 +38,8 @@ public class CollectorsTest {
 
         List<Asset> assetList = assets.stream().filter(x -> x.getAssetName().equals(x.getAssetCode())).collect(Collectors.toList());
         Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
+
+        List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
         System.out.println(assetList);
         System.out.println(optionalAsset);
     }
