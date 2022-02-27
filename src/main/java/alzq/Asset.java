@@ -3,7 +3,7 @@ package alzq;
 import lombok.Data;
 
 /**
- * @author lzq
+ * @author zzz
  */
 @Data
 public class Asset {

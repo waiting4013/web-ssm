@@ -7,17 +7,18 @@ public class GenerateSql {
 
     public static void main(String[] args) {
         String stat=    "";
-        String SSD1=stat.replaceAll("\\n",",");
+//        String SSD1=stat.replaceAll("\\n",",");
+        String SSD1 = "G15431637_1,G15431637_2,G15431637_4,G15431637_5,G15431637_6,G15431637_8,G15431637_9,G15431637_10,G15431637_13,G15431637_3,G15431637_7,G15431637_11,G15431637_12";
         System.out.println(SSD1);
         //String sql = "INSERT INTO ejiayou_xyorder_monitor_quota  (`station_id`, `station_quota`, `state`)  VALUES";
 
         String[] stationArr = SSD1.split(",");
         StringBuilder value = new StringBuilder();
         for (String s : stationArr) {
-            value.append("\"").append(s).append("\",");
+            value.append("'").append(s).append("',");
         }
         //String finals = sql + value;
-//        System.out.println(value);
+        System.out.println(value);
         //System.out.println(finals);
         String sqq="22127";
         //
