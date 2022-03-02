@@ -21,10 +21,10 @@ public class CollectorsTest {
         assets.add(asset3);
         assets.add(asset4);
 //        System.out.println(assets);
-        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x->{
+        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> {
             return x.getSize().longValue();
         })));
-        System.out.println("collect:"+ collect);
+        System.out.println("collect:" + collect);
 
         Map<String, Long> applyAssetCount = new HashMap<>(4);
         applyAssetCount.put("衣服", 2L);
@@ -47,7 +47,7 @@ public class CollectorsTest {
 
         List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
 
-        Map<String, Asset> collect2 = assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (x1,x2) ->x1));
+        Map<String, Asset> collect2 = assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (oldData, newData) -> newData));
 
 //        System.out.println(assetList);
 //        System.out.println(optionalAsset);
