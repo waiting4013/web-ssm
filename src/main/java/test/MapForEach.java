@@ -13,7 +13,9 @@ public class MapForEach {
 
         Map<String, String> map = new HashMap<>(8);
         List<String> ddd = new ArrayList<>();
-        if (map.isEmpty())
+        if (map.isEmpty()){
+
+        }
         CollectionUtils.isEmpty(map);
 
 
