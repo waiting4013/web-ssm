@@ -28,7 +28,6 @@ public class Person {
      */
     private String area;
 
-    // 构造方法
     public Person(String name, int salary, int age, String sex, String area) {
         this.name = name;
         this.salary = salary;
