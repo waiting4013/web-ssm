@@ -337,6 +337,10 @@ public class StreamTest {
 
     }
 
+    /**
+     * 3.6.5 归约(reducing)
+     * Collectors类提供的reducing方法，相比于stream本身的reduce方法，增加了对自定义归约的支持。
+     */
     private static void test18() {
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 23, "male", "New York"));
@@ -351,8 +355,71 @@ public class StreamTest {
         Optional<Integer> sum2 = personList.stream().map(Person::getSalary).reduce(Integer::sum);
         System.out.println("员工薪资总和：" + sum2.get());
     }
+    /**
+     * sorted，中间操作。有两种排序：
+     *
+     * sorted()：自然排序，流中元素需实现Comparable接口
+     * sorted(Comparator com)：Comparator排序器自定义排序
+     * 案例：将员工按工资由高到低（工资一样则按年龄由大到小）排序
+     */
+    private static void test19() {
+        List<Person> personList = new ArrayList<Person>();
 
-    public static void main(String[] args) {
+        personList.add(new Person("Sherry", 9000, 24, "female", "New York"));
+        personList.add(new Person("Tom", 8900, 22, "male", "Washington"));
+        personList.add(new Person("Jack", 9000, 25, "male", "Washington"));
+        personList.add(new Person("Lily", 8800, 26, "male", "New York"));
+        personList.add(new Person("Alisa", 9000, 26, "female", "New York"));
+
+        // 按工资升序排序（自然排序）
+        List<String> newList = personList.stream().sorted(Comparator.comparing(Person::getSalary)).map(Person::getName)
+                .collect(Collectors.toList());
+        // 按工资倒序排序
+        List<String> newList2 = personList.stream().sorted(Comparator.comparing(Person::getSalary).reversed())
+                .map(Person::getName).collect(Collectors.toList());
+        // 先按工资再按年龄升序排序
+        List<String> newList3 = personList.stream()
+                .sorted(Comparator.comparing(Person::getSalary).thenComparing(Person::getAge)).map(Person::getName)
+                .collect(Collectors.toList());
+        // 先按工资再按年龄自定义排序（降序）
+        List<String> newList4 = personList.stream().sorted((p1, p2) -> {
+            if (p1.getSalary() == p2.getSalary()) {
+                return p2.getAge() - p1.getAge();
+            } else {
+                return p2.getSalary() - p1.getSalary();
+            }
+        }).map(Person::getName).collect(Collectors.toList());
+
+        System.out.println("按工资升序排序：" + newList);
+        System.out.println("按工资降序排序：" + newList2);
+        System.out.println("先按工资再按年龄升序排序：" + newList3);
+        System.out.println("先按工资再按年龄自定义降序排序：" + newList4);
+    }
+
+    /**
+     * 3.8 提取/组合
+     * 流也可以进行合并、去重、限制、跳过等操作。
+     */
+    private static void test20() {
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "d", "e", "f", "g" };
+
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+        // concat:合并两个流 distinct：去重
+        List<String> newList = Stream.concat(stream1, stream2).distinct().collect(Collectors.toList());
+        // limit：限制从流中获得前n个数据
+        List<Integer> collect = Stream.iterate(1, x -> x + 2).limit(10).collect(Collectors.toList());
+        // skip：跳过前n个数据
+        List<Integer> collect2 = Stream.iterate(1, x -> x + 2).skip(1).limit(5).collect(Collectors.toList());
+
+        System.out.println("流合并：" + newList);
+        System.out.println("limit：" + collect);
+        System.out.println("skip：" + collect2);
+    }
+
+
+        public static void main(String[] args) {
         test15();
 
     }
