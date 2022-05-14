@@ -1,5 +1,8 @@
 package test;
 
+import ssm.utils.DateUtil;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -87,4 +90,22 @@ public class dedeeTest {
         return map;
     }
 
-}
+    private static void  test1111(){
+        Timestamp expressStartDateNew  = new Timestamp(121231000);
+        Timestamp expressEndDateOld  = new Timestamp(1212312312);
+        Timestamp expressEndDateNew = new Timestamp(1212312312);
+        //旧时间
+        long oldTime = expressEndDateOld.getTime();
+        //新时间
+        long newTime = expressEndDateNew.getTime();
+        //当前时间
+        long nowTime = System.currentTimeMillis();
+//        long l = DateUtil.betweenDay(expressStartDateNew, expressEndDateNew, true);
+//        System.out.println(l);
+
+
+
+    }
+
+
+    }

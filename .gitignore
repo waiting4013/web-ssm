@@ -45,3 +45,7 @@ disconf
 /out
 *.class
 src/main/webapp/admin/_footer.jsp
+/data20220514.xlsx
+/logs/ssm.log
+/logs/ssm.log.1
+/~$data20220514.xlsx

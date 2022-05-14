@@ -299,7 +299,7 @@ public class StreamTest {
      * 案例：将员工按薪资是否高于8000分为两部分；将员工按性别和地区分组
      */
     private static void test16() {
-
+        ArrayList<String> list = new ArrayList<String>(){{add("test1"); add("test2");}};
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 1, "male", "New York"));
         personList.add(new Person("Jack", 7000, 2, "male", "Washington"));
@@ -409,9 +409,9 @@ public class StreamTest {
         // concat:合并两个流 distinct：去重
         List<String> newList = Stream.concat(stream1, stream2).distinct().collect(Collectors.toList());
         // limit：限制从流中获得前n个数据
-        List<Integer> collect = Stream.iterate(1, x -> x + 2).limit(10).collect(Collectors.toList());
+        List<Integer> collect = Stream.iterate(1, x -> x + 3).limit(10).collect(Collectors.toList());
         // skip：跳过前n个数据
-        List<Integer> collect2 = Stream.iterate(1, x -> x + 2).skip(1).limit(5).collect(Collectors.toList());
+        List<Integer> collect2 = Stream.iterate(1, x -> x + 2).skip(0).limit(5).collect(Collectors.toList());
 
         System.out.println("流合并：" + newList);
         System.out.println("limit：" + collect);
@@ -420,7 +420,7 @@ public class StreamTest {
 
 
         public static void main(String[] args) {
-        test15();
+            test20();
 
     }
 

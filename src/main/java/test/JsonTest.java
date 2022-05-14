@@ -1,5 +1,6 @@
 package test;
 
+import alzq.Asset;
 import ssm.utils.JsonUtil;
 
 import java.util.*;
@@ -51,7 +52,9 @@ public class JsonTest {
 //        Collections.sort(names, (String a, String b) -> b.compareTo(a));
         names.sort((String a, String b) -> b.compareTo(a));
 //        names.sort(Comparator.reverseOrder());
-
+        Asset  asset = new Asset();
+        asset.setAssetCode("12");
+        System.out.println(asset);
         System.out.println(names);
     }
 

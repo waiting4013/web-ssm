@@ -34,9 +34,7 @@ public class CollectorsTest {
 
         System.out.println(max);
 //        System.out.println(assets);
-        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> {
-            return x.getSize().longValue();
-        })));
+        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
         System.out.println("collect:" + collect);
 
         Map<String, Long> applyAssetCount = new HashMap<>(4);
@@ -57,6 +55,8 @@ public class CollectorsTest {
         System.out.println(assets);
 
         Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
+        List<Asset> collect3 = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).collect(Collectors.toList());
+
 
         List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
 
