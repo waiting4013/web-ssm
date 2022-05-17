@@ -2,7 +2,7 @@ package test;
 
 import java.io.Serializable;
 
-public class HeadquartersMonitorInfo implements Serializable {
+public class MonitorInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -40,7 +40,7 @@ public class HeadquartersMonitorInfo implements Serializable {
     */
     private String traceId;
 
-    public HeadquartersMonitorInfo() {
+    public MonitorInfo() {
         super();
     }
 

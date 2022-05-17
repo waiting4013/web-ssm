@@ -49,8 +49,8 @@ public class Monitor {
 
     private static  List<Map> getInfo(String result){
         JSONObject json = JSON.parseObject(result);
-        HeadquartersMonitorInfo headquartersMonitorInfo;
-        List<HeadquartersMonitorInfo> headquartersMonitorInfos = new ArrayList<>();
+        MonitorInfo monitorInfo;
+        List<MonitorInfo> monitorInfos = new ArrayList<>();
         if (json == null){
             return new ArrayList<>();
         }
