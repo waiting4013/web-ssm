@@ -1,4 +1,4 @@
-package test;
+package stream;
 
 
 import alzq.Asset;
@@ -16,9 +16,9 @@ public class CollectorsTest {
     public static void main(String[] args) {
         List<Asset> assets = new ArrayList<>();
         Asset asset1 = new Asset("餅乾1", "1341", 13L, 110D);
-        Asset asset2 = new Asset("餅乾2", "DAS", 14L, 1D);
+        Asset asset2 = new Asset("餅乾1", "DAS", 14L, 1D);
         Asset asset3 = new Asset("加油1", "加油1", 5L, 13D);
-        Asset asset4 = new Asset("加油2", "1342", 1L, 1D);
+        Asset asset4 = new Asset("加油1", "1342", 1L, 1D);
         assets.add(asset1);
         assets.add(asset2);
         assets.add(asset3);
@@ -29,13 +29,16 @@ public class CollectorsTest {
         Comparator<Asset> byName = Comparator.comparing(Asset::getNumber);
         Comparator<Asset> bySizeDesc = Comparator.comparing(Asset::getSize).reversed();
         assets.sort(byName.thenComparing(bySizeDesc));
-        System.out.println(assets);
+//        System.out.println(assets);
 
 
-        System.out.println(max);
+//        System.out.println(max);
 //        System.out.println(assets);
         Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
-        System.out.println("collect:" + collect);
+        Map<String, List<Asset>> dddd = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName));
+
+
+        System.out.println("collect:" + dddd);
 
         Map<String, Long> applyAssetCount = new HashMap<>(4);
         applyAssetCount.put("衣服", 2L);
@@ -46,13 +49,13 @@ public class CollectorsTest {
         Map<String, Long> merged = Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
-        System.out.println(merged);
+//        System.out.println(merged);
 
         List<Asset> assetList = assets.stream().filter(x -> !x.getAssetName().equals(x.getAssetCode())).collect(Collectors.toList());
 
         assets.removeIf(x -> x.getAssetName().equals(x.getAssetCode()));
-        System.out.println(assetList);
-        System.out.println(assets);
+//        System.out.println(assetList);
+//        System.out.println(assets);
 
         Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
         List<Asset> collect3 = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).collect(Collectors.toList());
@@ -72,6 +75,10 @@ public class CollectorsTest {
 
 //        System.out.println(assetList);
 //        System.out.println(optionalAsset);
+
+
+        // 根据料号查询物料详情
+
     }
 
 }

@@ -111,14 +111,14 @@ public class ExcelUtils {
 
     public static void main(String[] args) {
         System.out.println("start...");
-        List<Map<String, Object>> mapArrayList = new ArrayList<>();
+/*        List<Map<String, Object>> mapArrayList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("队列", i);
             map.put("生产者", i);
             map.put("消费者", i);
             mapArrayList.add(map);
-        }
+        }*/
         Monitor monitor = new Monitor();
         List<Map> list = monitor.getList();
 

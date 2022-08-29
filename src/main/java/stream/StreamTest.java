@@ -173,6 +173,8 @@ public class StreamTest {
 
         System.out.println("处理前的集合：" + list);
         System.out.println("处理后的集合：" + listNew);
+
+        System.out.println();
     }
 
     /**
@@ -420,7 +422,7 @@ public class StreamTest {
 
 
         public static void main(String[] args) {
-            test20();
+            test1();
 
     }
 

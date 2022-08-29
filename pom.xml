@@ -265,6 +265,11 @@
       <version>2.1</version>
       <classifier>jdk15</classifier><!-- 指定jdk版本 -->
     </dependency>
+    <dependency>
+      <groupId>com.xiaoleilu</groupId>
+      <artifactId>hutool-core</artifactId>
+      <version>3.2.3</version>
+    </dependency>
 
   </dependencies>
 

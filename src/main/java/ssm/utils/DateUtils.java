@@ -44,6 +44,15 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 		}
 		return date;
 	}
+	public static Date timestampToDate(Timestamp ts) {
+		Date date = new Date();
+		try {
+			date = ts;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
 
 	public static String getBeforeDay(String dateTxt) {
 		Date beginDate = null;
@@ -123,11 +132,10 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 		Date date = new Date();// 取时间
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		calendar.add(calendar.DATE, n);// 把日期往后增加一天.整数往后推,负数往前移动
+		calendar.add(Calendar.DATE, n);// 把日期往后增加一天.整数往后推,负数往前移动
 		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = formatter.format(date);
-		return dateString;
+		return formatter.format(date);
 	}
 
 	/**
@@ -139,18 +147,18 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	public static String getBeforeDays(String dateTxt,int n) {
 		Date beginDate ;
 		SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
-		String tragetDate = "";
+		String targetDate = "";
 		try {
 			beginDate = dft.parse(dateTxt);
 			Calendar date = Calendar.getInstance();
 			date.setTime(beginDate);
 			date.set(Calendar.DATE, date.get(Calendar.DATE) + n);
 			Date endDate = dft.parse(dft.format(date.getTime()));
-			tragetDate = dft.format(endDate);
+			targetDate = dft.format(endDate);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		return tragetDate;
+		return targetDate;
 	}
 
 	public static String getDatePattern() {

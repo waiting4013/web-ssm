@@ -7,6 +7,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -68,4 +69,20 @@ public class RedisTest {
         return true;
     }
 
+    public static void main(String[] args) {
+        String  data = "asdad,mghjt";
+
+        String substring = data.substring(data.length() - 4);
+
+        System.out.println(substring);
+
+        String[] split = data.split(",");
+        if (split.length==1) {
+
+        }
+        List<String> list = Arrays.asList(split);
+        System.out.println(list);
+        System.out.println(list.size());
+
+    }
 }

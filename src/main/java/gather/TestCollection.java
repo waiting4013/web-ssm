@@ -1,11 +1,11 @@
 package gather;
 
-import ssm.utils.DateUtil;
+import ssm.utils.DateUtils;
 
 public class TestCollection {
 
     public static void main(String[] args) {
-        String hh = DateUtil.getNow("HH");
+        String hh = DateUtils.getNow("HH");
         System.out.println(hh);
 
         if (Integer.valueOf(hh) >= 22 || Integer.valueOf(hh) < 3) {

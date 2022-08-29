@@ -1,6 +1,6 @@
 package test;
 
-import ssm.utils.DateUtil;
+import ssm.utils.DateUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -129,13 +129,13 @@ public class test {
             String formatString = "yyyy-MM-dd HH:mm:ss";
 
             SimpleDateFormat format = new SimpleDateFormat(formatString);
-            String todayNext = DateUtil.getTodayNext(-7);
+            String todayNext = DateUtils.getTodayNext(-7);
             //System.out.println(todayNext);
-            DateUtil.getBeforeDay("2020-07-14");
+            DateUtils.getBeforeDay("2020-07-14");
 
             int dayOfMonth = LocalDate.now().getDayOfMonth();
             LocalDate.now();
-            String firstDayOfBeforeMonth = DateUtil.getFirstDayOfBeforeMonth(LocalDate.now());
+            String firstDayOfBeforeMonth = DateUtils.getFirstDayOfBeforeMonth(LocalDate.now());
             //System.out.println(dayOfMonth);
             //System.out.println(firstDayOfBeforeMonth);
 
@@ -197,7 +197,7 @@ public class test {
 
             //deal("",22223319);
 
-            String monthFinalDay = DateUtil.getMonthFinalDay("2020-11-12", 0);
+            String monthFinalDay = DateUtils.getMonthFinalDay("2020-11-12", 0);
 
 
             System.out.println(monthFinalDay);
