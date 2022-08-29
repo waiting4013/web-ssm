@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Monitor {
+public class MonitorTest {
     //    @Value("${hkvi.config.host}")
     private  static String host = "10.32.19.253";
     //    @Value("${hkvi.config.appKey}")

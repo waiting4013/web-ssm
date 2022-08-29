@@ -3,7 +3,8 @@ package ssm.utils;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
-import test.Monitor;
+import test.MonitorTest;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -111,15 +112,15 @@ public class ExcelUtils {
 
     public static void main(String[] args) {
         System.out.println("start...");
-/*        List<Map<String, Object>> mapArrayList = new ArrayList<>();
+        List<Map<String, Object>> mapArrayList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("队列", i);
             map.put("生产者", i);
             map.put("消费者", i);
             mapArrayList.add(map);
-        }*/
-        Monitor monitor = new Monitor();
+        }
+        MonitorTest monitor = new MonitorTest();
         List<Map> list = monitor.getList();
 
         System.out.println("end...");
