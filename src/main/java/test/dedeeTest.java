@@ -1,16 +1,16 @@
 package test;
 
 import ssm.utils.DateUtil;
+import ssm.utils.DateUtils;
 
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class dedeeTest {
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
         /*try {
             InetAddress ia=InetAddress.getLocalHost();
             String localname=ia.getHostName();
@@ -61,38 +61,37 @@ public class dedeeTest {
         System.out.println(ss.contains("d"));*/
 
         //yy/MM/dd HH:mm:ss
-        SimpleDateFormat df=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        String format = df.format(cal.getTime());
-        String OrderDate=format.substring(0,10);
-        String OrderTime=format.substring(11,19);
-        System.out.println(OrderDate);
-        System.out.println(OrderTime);
-        Map dateTimes = getDateTimes();
-        System.out.println("----------"+dateTimes.get("orderDate"));
-        System.out.println("------======--"+dateTimes.get("orderTime"));
-
-    }
+//        SimpleDateFormat df=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeInMillis(System.currentTimeMillis());
+//        String format = df.format(cal.getTime());
+//        String OrderDate=format.substring(0,10);
+//        String OrderTime=format.substring(11,19);
+//        System.out.println(OrderDate);
+//        System.out.println(OrderTime);
+//        Map dateTimes = getDateTimes();
+//        System.out.println("----------"+dateTimes.get("orderDate"));
+//        System.out.println("------======--"+dateTimes.get("orderTime"));
+//
+//    }
 
     //[{"userDiscount":"1","rule":[{"levelId":1,"vip_level":"V1","levelName":"白银会员","oilPrice92":"1","oilPrice95":"1","oilPrice0":"2","oilPrice98":"3"},{"levelId":2,"vip_level":"V2","levelName":"黄金会员","oilPrice92":"2","oilPrice95":"1","oilPrice0":"2","oilPrice98":"3"},{"levelId":3,"vip_level":"V3","levelName":"铂金会员","oilPrice92":"1","oilPrice95":"1","oilPrice0":"2","oilPrice98":"3"},{"levelId":4,"vip_level":"V4","levelName":"钻石会员","oilPrice92":"1","oilPrice95":"1","oilPrice0":"2","oilPrice98":"3"}]}]
 
 
-
-    private static Map  getDateTimes(){
-        Map<String,String> map=new HashMap<>(2);
-        SimpleDateFormat df=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private static Map getDateTimes() {
+        Map<String, String> map = new HashMap<>(2);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         String format = df.format(cal.getTime());
-        map.put("orderDate",format.substring(0,10));
-        map.put("orderTime",format.substring(11,19));
+        map.put("orderDate", format.substring(0, 10));
+        map.put("orderTime", format.substring(11, 19));
         return map;
     }
 
-    private static void  test1111(){
-        Timestamp expressStartDateNew  = new Timestamp(121231000);
-        Timestamp expressEndDateOld  = new Timestamp(1212312312);
+    private static void test1111() {
+        Timestamp expressStartDateNew = new Timestamp(121231000);
+        Timestamp expressEndDateOld = new Timestamp(1212312312);
         Timestamp expressEndDateNew = new Timestamp(1212312312);
         //旧时间
         long oldTime = expressEndDateOld.getTime();
@@ -104,8 +103,42 @@ public class dedeeTest {
 //        System.out.println(l);
 
 
-
     }
 
 
+
+    private static void test2() {
+        String format = DateUtils.format(new Date(), "yyMMdd-");
+
+        System.out.println(format);
     }
+
+    /**
+     * 选择插入
+     * @param array
+     */
+    private static void selectionSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < array[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            if (i != minIndex) {
+             int temp = array[i];
+             array[i] = array[minIndex];
+             array[minIndex] = temp ;
+            }
+        }
+    }
+
+    public static void insertSort() {
+
+    }
+    public static void main(String[] args) {
+        int[] array = new int[] {3,5,16,61,11,25,2,165,12,53,66,9,22};
+        selectionSort(array);
+        System.out.println(Arrays.toString(array));
+    }
+}
