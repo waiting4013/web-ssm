@@ -134,12 +134,29 @@ public class dedeeTest {
         }
     }
 
-    public static void insertSort() {
+    public static void insertSort(int[] array) {
+        for (int i = 1 ; i< array.length ; i ++ ){
+            int insertValue = array[i];
+            int j = i -1;
+            //从右向左比较元素的同时，进行元素复制
+            for (; (j>=0) && (insertValue < array[j]); j--){
+                array[j+1] = array[j];
+            }
+            //insertValue的值插入适当位置
+            array[j + 1] = insertValue;
+        }
+    }
+
+    public static void shellSort() {
 
     }
     public static void main(String[] args) {
         int[] array = new int[] {3,5,16,61,11,25,2,165,12,53,66,9,22};
-        selectionSort(array);
+//        selectionSort(array);
+//        System.out.println(Arrays.toString(array));
+
+        insertSort(array);
         System.out.println(Arrays.toString(array));
+
     }
 }
