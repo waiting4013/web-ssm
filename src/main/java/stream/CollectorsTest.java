@@ -29,59 +29,64 @@ public class CollectorsTest {
         List<Asset> collect4 = assets.stream().distinct().collect(Collectors.toList());
         System.out.println(collect4);
 
+        List<Map<String, Object>> lists =new ArrayList<>();
+        Map<String, Object> merged = lists.stream()
+                .map(Map::entrySet)
+                .flatMap(Set::stream)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        Optional<Asset> max = assets.stream().max(Comparator.comparing(Asset::getNumber));
+        Asset asset = max.get();
+        Comparator<Asset> byName = Comparator.comparing(Asset::getNumber);
+        Comparator<Asset> bySizeDesc = Comparator.comparing(Asset::getSize).reversed();
+        assets.sort(byName.thenComparing(bySizeDesc));
+
+        Map resultMap = lists.stream().collect(
+                Collectors.toMap(s->s.get("staticDay"), s -> s.get("total")));
+
+//        System.out.println(max);
+//        System.out.println(assets);
+        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
+        Map<String, List<Asset>> dddd = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName));
 
 
-//        Optional<Asset> max = assets.stream().max(Comparator.comparing(Asset::getNumber));
-//        Asset asset = max.get();
-//        Comparator<Asset> byName = Comparator.comparing(Asset::getNumber);
-//        Comparator<Asset> bySizeDesc = Comparator.comparing(Asset::getSize).reversed();
-//        assets.sort(byName.thenComparing(bySizeDesc));
-////        System.out.println(assets);
-//
-//
-////        System.out.println(max);
-////        System.out.println(assets);
-//        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
-//        Map<String, List<Asset>> dddd = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName));
-//
-//
-//        System.out.println("collect:" + dddd);
-//
-//        Map<String, Long> applyAssetCount = new HashMap<>(4);
-//        applyAssetCount.put("衣服", 2L);
-//        applyAssetCount.put("裤子", 3L);
-//        Map<String, Long> personAssetsCount = new HashMap<>(4);
-//        personAssetsCount.put("商业", 2L);
-//        personAssetsCount.put("裤子", 3L);
-//        Map<String, Long> merged = Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
-//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
-//
-////        System.out.println(merged);
-//
-//        List<Asset> assetList = assets.stream().filter(x -> !x.getAssetName().equals(x.getAssetCode())).collect(Collectors.toList());
-//
-//        assets.removeIf(x -> x.getAssetName().equals(x.getAssetCode()));
-////        System.out.println(assetList);
-////        System.out.println(assets);
-//
-//        Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
-//        List<Asset> collect3 = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).collect(Collectors.toList());
-//
-//
-//        List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
-//
-//        Map<String, Asset> collect2 = assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (oldData, newData) -> newData));
-//
-//        Integer[] myArray = {1, 2, 3};
-//        List myList = Arrays.stream(myArray).collect(Collectors.toList());
-//        //基本类型也可以实现转换（依赖boxed的装箱操作）
-//        int[] myArray2 = {1, 2, 3};
-//        List myList1 = Arrays.stream(myArray2).boxed().collect(Collectors.toList());
-//
-//        List<Integer> integers = Arrays.asList(myArray);
+        System.out.println("collect:" + dddd);
 
+        Map<String, Long> applyAssetCount = new HashMap<>(4);
+        applyAssetCount.put("衣服", 2L);
+        applyAssetCount.put("裤子", 3L);
+        Map<String, Long> personAssetsCount = new HashMap<>(4);
+        personAssetsCount.put("商业", 2L);
+        personAssetsCount.put("裤子", 3L);
+        Map<String, Long> merged = Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
+
+//        System.out.println(merged);
+
+        List<Asset> assetList = assets.stream().filter(x -> !x.getAssetName().equals(x.getAssetCode())).collect(Collectors.toList());
+
+        assets.removeIf(x -> x.getAssetName().equals(x.getAssetCode()));
 //        System.out.println(assetList);
-//        System.out.println(optionalAsset);
+//        System.out.println(assets);
+
+        Optional<Asset> optionalAsset = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).findFirst();
+        List<Asset> collect3 = assets.stream().filter(x -> "1341".equals(x.getAssetCode())).collect(Collectors.toList());
+
+
+        List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
+
+        Map<String, Asset> collect2 = assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (oldData, newData) -> newData));
+
+        Integer[] myArray = {1, 2, 3};
+        List myList = Arrays.stream(myArray).collect(Collectors.toList());
+        //基本类型也可以实现转换（依赖boxed的装箱操作）
+        int[] myArray2 = {1, 2, 3};
+        List myList1 = Arrays.stream(myArray2).boxed().collect(Collectors.toList());
+
+        List<Integer> integers = Arrays.asList(myArray);
+
+        System.out.println(assetList);
+        System.out.println(optionalAsset);
 
 
         // 根据料号查询物料详情
