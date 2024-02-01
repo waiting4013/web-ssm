@@ -1,5 +1,8 @@
 package ssm.utils;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
@@ -7,9 +10,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	public static Date date = null;
@@ -19,6 +26,8 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	public static Calendar calendar = Calendar.getInstance();
 
 	public static String FORMAT_SHORT = "yyyy-MM-dd";
+
+	public static String FORMAT_SHORT_DD = "yyyyMMdd";
 
 	public static String FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
 
@@ -1319,10 +1328,65 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 
 
 
+	/**
+	 * 将秒转换为string
+	 * @param number
+	 * @return
+	 */
+	public static String  revertSecondToDateString(Long number){
+		Long hours = number / 3600; // 小时数
+		Long minutes = (number % 3600) / 60; // 分钟数
+		Long seconds = (number % 3600) % 60; // 秒数
+		System.out.println("转换结果：" + hours + "小时 " + minutes + "分钟 " + seconds + "秒");
 
+		Long second = number%60;
+		Long min = number*60%60;
+		Long hour = number*60*60%60;
+		System.out.println("转换结果：" + hour + "小时 " + min + "分钟 " + second + "秒");
+
+		String time = hour+ ":" + min+ ":"+second;
+		Date date = DateUtil.strToDate(time, DateUtil.TIME);
+		String format = DateUtil.format(date, DateUtil.TIME);
+		System.out.println(format);
+		return format;
+	}
 
 	public static void main(String[] args) {
-		String dateStr = "2017-11-01 12:11:36";
-		System.out.println(getNextHourDate(dateStr, FORMAT_LONG, 1));
+//		LocalDateTime now = LocalDateTime.now();
+//		LocalDateTime last = LocalDateTime.of(2023,12,28,14,29,30);
+//
+//		long until = LocalDateTime.now().until(last, ChronoUnit.SECONDS);
+//		long until2 = last.until(now, ChronoUnit.SECONDS);
+//		revertSecondToDateString(until2);
+////		String dateStr = "2017-11-01 12:11:36";
+////		System.out.println(getNextHourDate(dateStr, FORMAT_LONG, 1));
+
+		LoadingCache<String, Object> cache = cacheData(10, 29, 1, TimeUnit.MINUTES);
+//		cache.put("test", 1212);
+
+		try {
+			Object test = cache.get("test");
+			System.out.println(test);
+		} catch (ExecutionException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+
+	private static LoadingCache<String, Object> cacheData(int initialCapacity, int maximumSize,long  duration, TimeUnit unit){
+		LoadingCache<String, Object> localCache = CacheBuilder.newBuilder()
+				.initialCapacity(initialCapacity)
+				.maximumSize(maximumSize)
+				// 设定写入过期时间
+				.expireAfterWrite(duration, unit)
+				.build(new CacheLoader<String, Object>() {
+					@Override
+					public String load(String key) {
+						return "null";
+					}
+				});
+
+
+		return localCache;
 	}
 }

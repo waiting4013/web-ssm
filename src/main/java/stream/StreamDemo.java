@@ -49,6 +49,7 @@ public class StreamDemo {
         Stream<Double> stream3 = Stream.generate(Math::random).limit(3);
         stream3.forEach(System.out::println);
 
+
     }
 
 

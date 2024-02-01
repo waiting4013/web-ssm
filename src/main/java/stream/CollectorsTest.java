@@ -46,7 +46,18 @@ public class CollectorsTest {
 
 //        System.out.println(max);
 //        System.out.println(assets);
-        Map<String, Long> collect = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
+        Map<String, Long> collect =
+                assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.summingLong(x -> x.getSize().longValue())));
+
+
+        Map<String,  List<Asset>> collect5 =
+                assets.stream().collect(Collectors.groupingBy(Asset::getAssetName));
+
+
+        Map<String, Map<String, List<Asset>>> collect511 =
+                assets.stream().collect(Collectors.groupingBy(Asset::getAssetName, Collectors.groupingBy(Asset :: getAssetCode)));
+
+
         Map<String, List<Asset>> dddd = assets.stream().collect(Collectors.groupingBy(Asset::getAssetName));
 
 
@@ -58,7 +69,7 @@ public class CollectorsTest {
         Map<String, Long> personAssetsCount = new HashMap<>(4);
         personAssetsCount.put("商业", 2L);
         personAssetsCount.put("裤子", 3L);
-        Map<String, Long> merged = Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
+        Map<String, Long> merged1= Stream.concat(applyAssetCount.entrySet().stream(), personAssetsCount.entrySet().stream())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
 //        System.out.println(merged);
@@ -75,7 +86,8 @@ public class CollectorsTest {
 
         List<Long> collect1 = assetList.stream().map(Asset::getNumber).collect(Collectors.toList());
 
-        Map<String, Asset> collect2 = assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (oldData, newData) -> newData));
+        Map<String, Asset> collect2 =
+                assets.stream().collect(Collectors.toMap(Asset::getAssetName, Function.identity(), (oldData, newData) -> newData));
 
         Integer[] myArray = {1, 2, 3};
         List myList = Arrays.stream(myArray).collect(Collectors.toList());

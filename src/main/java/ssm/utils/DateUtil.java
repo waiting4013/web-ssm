@@ -1,11 +1,10 @@
 package ssm.utils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +23,7 @@ public class DateUtil extends DateUtils {
     public static String FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
 
     public static String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.S";
+    public static String TIME = "HH:mm:ss";
 
     public static String FORMAT_SHORT_CN = "yyyy年MM月dd日";
 
@@ -64,7 +64,7 @@ public class DateUtil extends DateUtils {
     }
 
     public static String getDayCondition(String startDate, String endDate) {
-        if (StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
+        if (StringUtil.isEmpty(startDate) || StringUtil.isEmpty(endDate)) {
             return null;
         } else {
             String sql = " BETWEEN '" + startDate + " 00:00:00'  AND '" + endDate + " 23:59:59' ";
@@ -82,7 +82,7 @@ public class DateUtil extends DateUtils {
      * @return sql 输出某一天条件
      */
     public static String getDayCondition(String date) {
-        if (StringUtils.isEmpty(date)) {
+        if (StringUtil.isEmpty(date)) {
             return null;
         } else {
             String sql = " BETWEEN '" + date + " 00:00:00'  AND '" + date + " 23:59:59' ";
@@ -124,7 +124,7 @@ public class DateUtil extends DateUtils {
         Date date = new Date();// 取时间
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
-        calendar.add(calendar.DATE, n);// 把日期往后增加一天.整数往后推,负数往前移动
+        calendar.add(Calendar.DATE, n);// 把日期往后增加一天.整数往后推,负数往前移动
         date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(date);
@@ -314,7 +314,7 @@ public class DateUtil extends DateUtils {
     }
 
     public static boolean isDateTime(String str) {
-        if (StringUtils.isEmpty(str)) {
+        if (StringUtil.isEmpty(str)) {
             return false;
         }
         if (str.indexOf(" ") > 0) {
@@ -1205,6 +1205,36 @@ public class DateUtil extends DateUtils {
     public static void main(String[] args) {
         String dateStr = "2017-11-01 12:11:36";
         System.out.println(getNextHourDate(dateStr, FORMAT_LONG, 1));
+    }
+
+    public static Date strToDate(String strDate, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(strDate, pos);
+        return strtodate;
+    }
+
+    public static String strToStr(String strDate, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(strDate, pos);
+        String format1 = DateUtil.format(strtodate, format);
+        return format1;
+    }
+
+    public static Date add(Date date, int calendarField, int amount) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        } else {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(calendarField, amount);
+            return c.getTime();
+        }
+    }
+
+    public static Date addDays(Date date, int amount) {
+        return add(date, 5, amount);
     }
 }
 

@@ -95,7 +95,7 @@ public class StreamTest {
     /**
      * 获取员工工资最高的人。
      */
-    private static void test7() {
+    private static void max() {
         List<Person> personList = new ArrayList<>();
         personList.add(new Person("Tom", 8900, 23, "male", "New York"));
         personList.add(new Person("Jack", 7000, 25, "male", "Washington"));
@@ -269,7 +269,7 @@ public class StreamTest {
      * 求和：summingInt、summingLong、summingDouble
      * 统计以上所有：summarizingInt、summarizingLong、summarizingDouble
      */
-    private static void test15() {
+    private static void averagingInt() {
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 23, "male", "New York"));
         personList.add(new Person("Jack", 7000, 25, "male", "Washington"));
@@ -300,7 +300,7 @@ public class StreamTest {
      * <p>
      * 案例：将员工按薪资是否高于8000分为两部分；将员工按性别和地区分组
      */
-    private static void test16() {
+    private static void partitioningBy() {
         ArrayList<String> list = new ArrayList<String>(){{add("test1"); add("test2");}};
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 1, "male", "New York"));
@@ -325,7 +325,7 @@ public class StreamTest {
     /**
      * joining可以将stream中的元素用特定的连接符（没有的话，则直接连接）连接成一个字符串。
      */
-    private static void test17() {
+    private static void joining() {
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 23, "male", "New York"));
         personList.add(new Person("Jack", 7000, 25, "male", "Washington"));
@@ -343,7 +343,7 @@ public class StreamTest {
      * 3.6.5 归约(reducing)
      * Collectors类提供的reducing方法，相比于stream本身的reduce方法，增加了对自定义归约的支持。
      */
-    private static void test18() {
+    private static void reducing() {
         List<Person> personList = new ArrayList<Person>();
         personList.add(new Person("Tom", 8900, 23, "male", "New York"));
         personList.add(new Person("Jack", 7000, 25, "male", "Washington"));
@@ -364,7 +364,7 @@ public class StreamTest {
      * sorted(Comparator com)：Comparator排序器自定义排序
      * 案例：将员工按工资由高到低（工资一样则按年龄由大到小）排序
      */
-    private static void test19() {
+    private static void sorted() {
         List<Person> personList = new ArrayList<Person>();
 
         personList.add(new Person("Sherry", 9000, 24, "female", "New York"));
