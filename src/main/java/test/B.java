@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class B extends A{
 
@@ -40,12 +41,22 @@ public class B extends A{
 //        System.out.println(until);
 //        System.out.println(until2);
 //        System.out.println(delaySecond);
-        Date date = DateUtils.addDays(new Date(), -2);
-        String format = DateUtils.format(date, DateUtils.FORMAT_SHORT_DD);
-        Date format1 = DateUtils.format(format, DateUtils.FORMAT_SHORT_DD);
+//        Date date = DateUtils.addDays(new Date(), -2);
+//        String format = DateUtils.format(date, DateUtils.FORMAT_SHORT_DD);
+//        Date format1 = DateUtils.format(format, DateUtils.FORMAT_SHORT_DD);
+//
+//        System.out.println(date);
+//        System.out.println(format);
+//        System.out.println(format1);
 
-        System.out.println(date);
-        System.out.println(format);
-        System.out.println(format1);
+        Map<String, String> mao = new HashMap<>(4);
+        mao.put("zzzz", "d1dd");
+        mao.put("qqqq", "d1dd33333");
+        System.out.println(mao);
+        mao = new HashMap<>(4);
+        mao.put("wwww", "ddddd");
+        mao.put("eeee", "fffff");
+        System.out.println(mao);
+
     }
 }

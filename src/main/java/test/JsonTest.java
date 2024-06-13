@@ -9,7 +9,7 @@ public class JsonTest {
 
     public static void main(String[] args) {
 
-        test1212112();
+        test1212();
 
 
     }
@@ -23,16 +23,23 @@ public class JsonTest {
     }
 
     private static  void test1212(){
-        String executeParam = "1213,41231";
-        String[] idArray = executeParam.split(",");
-        List<Long> idList = new ArrayList<>();
-        for (String s : idArray) {
-            idList.add(Long.parseLong(s));
-        }
-        Long[] idsLongArray = new Long[idList.size()];
-        idList.toArray(idsLongArray);
-        System.out.println(idList);
-        System.out.println(Arrays.asList(idsLongArray));
+//        String executeParam = "1213,41231";
+//        String[] idArray = executeParam.split(",");
+//        List<Long> idList = new ArrayList<>();
+//        for (String s : idArray) {
+//            idList.add(Long.parseLong(s));
+//        }
+//        Long[] idsLongArray = new Long[idList.size()];
+//        idList.toArray(idsLongArray);
+//        System.out.println(idList);
+
+
+        Set<String>  ids= new HashSet<>();
+        ids.add("1");
+        ids.add("2");
+        ids.add("3");
+        boolean contains = ids.contains("3");
+        System.out.println(contains);
     }
 
     private static  void test1212112(){
