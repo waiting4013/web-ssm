@@ -36,7 +36,7 @@
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="${driverClasss}"/>
+        <property name="driverClassName" value="${driverClasses}"/>
         <property name="url" value="${jdbcUrl}"/>
         <property name="username" value="${username}"/>
         <property name="password" value=""/>
