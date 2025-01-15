@@ -11,7 +11,7 @@ public class UserCongtroller {
 
 
         public void user(){
-
+            //启动
             ApplicationContext applicationContext=new ClassPathXmlApplicationContext("");
             applicationContext.getBean("");
 
