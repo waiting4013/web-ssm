@@ -3,6 +3,9 @@ package annotation;
 
 import java.lang.annotation.*;
 
+    /**
+     * @author lizhiqiang
+     */
     @Documented
     @Inherited
     @Target({ ElementType.FIELD, ElementType.METHOD })
